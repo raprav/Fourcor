@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('Fourcor '. $this->translate('Prueba de selección'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
 
@@ -16,11 +16,11 @@
         <!-- Scripts -->
         <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
                                       ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-                                      ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
+                                      ->prependFile($this->basePath() . '/js/jquery-1.8.0.min.js') ?>
 
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -28,22 +28,67 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Skeleton Application') ?></a>
+                    <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Fourcor') ?></a>
                     <div class="nav-collapse collapse">
+
+                        <?php 
+                        function echoActiveClassIfRequestMatches($requestUri)
+                        {
+                            $current_file_name = basename($_SERVER['REQUEST_URI'], ".php");
+                            if ($current_file_name == $requestUri)
+                                echo 'class="active"';
+                        }
+                        ?>
+
                         <ul class="nav">
-                            <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                            <li <?=echoActiveClassIfRequestMatches("proyecto")?>>
+                                <a href="<?php echo $this->url('proyecto',
+                                        array('action'  =>'index',
+                                        ));?>">Proyectos</a></li>
+                            <li <?=echoActiveClassIfRequestMatches("trabajador")?>>
+                                <a href="<?php echo $this->url('trabajador',
+                                        array('action'  =>'index',
+                                        ));?>">Trabajadores</a></li>
                         </ul>
+                        <!-- Pagina de datos adjuntos
+                      <div style="display:inline-block" class="pull-right">
+
+                        <ul class="nav nav-list ">
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Explicaciones y archivos adjuntos<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                            <li><a href="#">Resumen</a></li>
+                            <li class="divider"></li>
+                            <li class="nav-header">Ingeniería del Software</li>
+                                <li><a href="#">Diagrama E-R Base de Datos</a></li>
+                                <li><a href="#">Diagrama UML de clases</a></li>
+                             <li class="nav-header">Back-End</li>
+                                <li><a href="#">Zend Framework 2.2</a></li>
+                                <li><a href="#">Base de datos</a></li>
+                            <li class="nav-header">Front-End</li>
+                                <li><a href="#">Bootstrap 2.3.2</a></li>
+                            </ul>
+                          </li>
+                        </ul>                          
+                      </div>-->
+                        <!--<ul class="nav">
+                            <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                        </ul>-->
                     </div><!--/.nav-collapse -->
+                    
                 </div>
             </div>
+
         </div>
+        
         <div class="container">
             <?php echo $this->content; ?>
             <hr>
             <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                
             </footer>
         </div> <!-- /container -->
         <?php echo $this->inlineScript() ?>
+
     </body>
 </html>

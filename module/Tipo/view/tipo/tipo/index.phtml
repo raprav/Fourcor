@@ -1,0 +1,30 @@
+<?php
+// module/Album/view/tipo/tipo/index.phtml:
+
+$title = 'My tipos';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('tipo', array('action'=>'add'));?>">Add new tipo</a>
+</p>
+
+<table class="table">
+<tr>
+    <th>id</th>
+    <th>nombre</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($tipos as $tipo) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($tipo->id);?></td>
+    <td><?php echo $this->escapeHtml($tipo->nombre);?></td>
+    <!--<td>
+        <a href="<?php echo $this->url('tipo',
+            array('action'=>'edit', 'id' => $tipo->id));?>">Edit</a>
+        <a href="<?php echo $this->url('tipo',
+            array('action'=>'delete', 'id' => $tipo->id));?>">Delete</a>
+    </td>-->
+</tr>
+<?php endforeach; ?>
+</table>

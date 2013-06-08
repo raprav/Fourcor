@@ -1,0 +1,24 @@
+<?php
+// module/Album/view/proyecto/proyecto/delete.phtml:
+
+$title = 'Eliminar proyecto';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>¿Eliminar definitivamente el proyecto 
+    '<?php echo $this->escapeHtml($proyecto->nombre); ?>'? Todos sus datos asociados se perderán.
+</p>
+<?php
+$url = $this->url('proyecto', array(
+    'action' => 'delete',
+    'id'     => $this->id,
+));
+?>
+<form action="<?php echo $url; ?>" method="post">
+<div>
+    <input type="hidden" name="id" value="<?php echo (int) $proyecto->id; ?>" />
+    <input type="submit" name="del" value="Sí" class="btn btn-danger"/>
+    <input type="submit" name="No" value="Pensándolo bien..." class="btn" />
+</div>
+</form>

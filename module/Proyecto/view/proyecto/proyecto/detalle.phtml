@@ -1,0 +1,121 @@
+<?php
+$nombreProyecto = $this->escapeHtml($proyecto->nombre);
+$this->title = 'Proyecto '.$nombreProyecto;
+$this->headTitle($this->title);
+
+//Conseguir los indices de los tipos 
+    $i = 0;
+    foreach ($tipos as $tipo) :
+        $array[$i] = $this->escapeHtml($tipo->nombre);
+        $i = $i+1;
+    endforeach;    
+?>
+
+<head>
+    <div class="page-header">
+        <div class="row">
+            <div class="span8">
+                <h1>Proyecto <?php echo $nombreProyecto ?><small> <p><?php echo ($this->escapeHtml($proyecto->estado) == 1) ? 'Abierto' : 'Terminado';?></p></small></h1>
+            </div>
+            <div class="span4" style="margin-top:15px;">
+                <div class="pull-right">
+                    <div class="span1">
+                        <form action="<?php echo $this->url('proyecto',
+                                            array('action'=>'edit', 'id' => $proyecto->id));?>">
+                            <input class="btn" type="submit" value="Editar">
+                        </form>
+                    </div>
+                    <div class="span1">
+                        <!--<a href="#myModal" role="button" style="margin-top:30px" class="delete-confirm btn btn-danger" data-toggle="modal">Eliminar</a>-->
+                        <form action="<?php echo $this->url('proyecto',
+                                    array('action'=>'delete', 'id' => $proyecto->id));?>">
+                            <input class="btn btn-danger" type="submit" value="Eliminar">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    
+</head>
+<body>
+    <div class="container">
+    	<!-- datos del proyecto -->
+		<div class="tabbable"> 
+		  <ul class="nav nav-tabs">
+		    <li class="active"><a href="#tab1" data-toggle="tab">Datos generales</a></li>
+		    <li><a href="#tab2" data-toggle="tab">Descripción</a></li>
+		    <li><a href="#tab3" data-toggle="tab">Trabajadores asociados</a></li>
+		  </ul>
+		  <div class="tab-content">
+		    <div class="tab-pane active" id="tab1">
+		    	<h3>Datos generales</h3>
+		    	<div class="row">
+			    	<!-- imagen -->
+			     	<div class="span4">
+			     		<iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=es&amp;geocode=&amp;q=Plaza+del+Carmen,+3&amp;aq=&amp;sll=36.841528,-2.457117&amp;sspn=0.079543,0.15398&amp;ie=UTF8&amp;hq=&amp;hnear=Plaza+del+Carmen,+3,+04003+Almer%C3%ADa,+Espa%C3%B1a&amp;ll=36.841889,-2.464913&amp;spn=0.001503,0.00228&amp;z=18&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=es&amp;geocode=&amp;q=Plaza+del+Carmen,+3&amp;aq=&amp;sll=36.841528,-2.457117&amp;sspn=0.079543,0.15398&amp;t=h&amp;ie=UTF8&amp;hq=&amp;hnear=Plaza+del+Carmen,+3,+04003+Almer%C3%ADa,+Espa%C3%B1a&amp;ll=36.841889,-2.464913&amp;spn=0.001503,0.00228&amp;z=18" style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
+			     	</div>
+			     	<!-- datos generales -->
+			     	<div class="span5 offset1">
+						<div class="row">
+                    		<h3><small>NOMBRE </small><p><?php echo $nombreProyecto ?></p></h3>
+                		</div>
+                		<div class="row">
+                    		<h3><small>ESTADO</small><p><?php echo ($this->escapeHtml($proyecto->estado) == 1) ? 'Abierto' : 'Terminado';?></p></h3>
+                		</div>
+			     	</div>
+			     </div>
+		    </div>
+		    <div class="tab-pane" id="tab2">
+		    	<h3>Descripción del proyecto</h3>
+		    	<p><?php echo $proyecto->descripcion ?></p>
+		    </div>
+		    <div class="tab-pane" id="tab3">
+		    	<h3>Trabajadores asociados <small>(<?php echo count($trabajadores)?> trabajadores)</small></h3>
+				<table class="table">
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Tipo</th>
+                </tr>
+                <?php foreach ($trabajadores as $trabajador) : ?>
+                <tr>
+                    <td><a href="<?php echo $this->url('trabajador',
+                                        array('action'  =>'detalle',
+                                                'dni'   => $trabajador->dni,
+                                        ));?>">
+                        <?php echo $this->escapeHtml($trabajador->dni);?>
+                    </a></td>
+                    <td><?php echo $this->escapeHtml($trabajador->nombre);?></td>
+                    <td><?php echo $this->escapeHtml($trabajador->apellidos);?></td>
+                    <td><?php echo $array[$this->escapeHtml($trabajador->tipo)];?></td>
+                </tr>
+                <?php endforeach; ?>
+                </table> 
+                <div class="alert alert-info" style="margin-top:50px;">
+                  <h4>Sección inacabada</h4>
+                  Todavía no está implementada la opción de editar la tabla de trabajadores asociados a un proyecto. La lista de trabajadores asociados se carga diréctamente desde el script sql, por lo que los nuevos proyectos no tendrán trabajadores asociados.
+
+                  Lamento las molestias.
+                </div>
+		    </div>
+		  </div>
+        </div>
+    </div>
+</body>
+
+<!--<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Eliminar proyecto</h3>
+  </div>
+  <div class="modal-body">
+    <p>Estás a punto de eliminar el proyecto "<?php echo $proyecto->nombre?>", ¿estás seguro?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Pensándolo bien...</button>
+    <button class="btn btn-danger">Ya lo creo que sí</button>
+  </div>
+</div> -->

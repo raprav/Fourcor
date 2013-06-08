@@ -1,0 +1,20 @@
+<?php
+// module/Album/view/proyecto/proyecto/edit.phtml:
+
+$title = 'Editar trabajador';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url(
+    'trabajador',
+    array(
+        'action' => 'edit',
+        'dni'     => $this->dni,
+    )
+));
+$form->prepare();
+
+echo $this->formTwb($form); 

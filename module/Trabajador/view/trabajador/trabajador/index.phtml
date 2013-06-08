@@ -1,0 +1,89 @@
+<?php
+// module/Album/view/album/album/index.phtml:
+
+$title = 'Trabajadores';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<form action="<?php echo $this->url('trabajador',
+                    array('action'=>'add', ));?>">
+    <input class="btn" type="submit" value="Nuevo trabajador">
+</form>
+<?php 
+    $i = 0;
+    foreach ($tipos as $tipo) :
+        //echo $i;
+        //echo $this->escapeHtml($tipo->nombre);
+        $array[$i] = $this->escapeHtml($tipo->nombre);
+        $i = $i+1;
+    endforeach;    
+?>
+
+<table class="table table-hover">
+<tr>
+    <th>DNI</th>
+    <th>Nombre</th>
+    <th>Apellidos</th>
+    <th>Correo</th>
+    <th>Tipo</th>
+    <th>&nbsp;</th>
+</tr>
+
+
+<?php foreach ($this->paginator as $trabajador) : ?>
+<tr>
+    <td><a href="<?php echo $this->url('trabajador',
+            array('action'  =>'detalle',
+                    'dni'   => $trabajador->dni,
+            ));?>">
+            <?php echo $this->escapeHtml($trabajador->dni);?>
+        </a>
+    </td>
+    <td><?php echo $this->escapeHtml($trabajador->nombre);?></td>
+    <td><?php echo $this->escapeHtml($trabajador->apellidos);?></td>
+    <td><?php echo $this->escapeHtml($trabajador->correo);?></td>
+    <td><?php echo $array[$this->escapeHtml($trabajador->tipo)];?></td>
+    <td>
+        <a href="<?php echo $this->url('trabajador',
+            array('action'=>'edit', 'dni' => $trabajador->dni));?>">Edit</a>
+        <a href="<?php echo $this->url('trabajador',
+            array('action'=>'delete', 'dni' => $trabajador->dni));?>">Delete</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>
+
+<!-- Paginador -->
+<?php 
+    echo $this->paginationControl(
+        $this->paginator,
+        'sliding',
+        array('partial/paginator.phtml', 'Trabajador'),
+        array(
+            'route' => 'trabajador'
+        )
+    );
+?>
+
+
+
+<!--<?php 
+    $i = 0;
+    foreach ($tipos as $tipo) :
+        echo $i;
+        //echo $this->escapeHtml($tipo->nombre);
+        $array[$i] = $this->escapeHtml($tipo->nombre);
+        $i = $i+1;
+        echo $this->escapeHtml($tipo->id);
+    endforeach;    
+    
+
+?>
+
+<?php 
+    for ($i = 0; $i < count($array); $i++) {
+        echo $array[$i];
+
+    }
+;?>-->
+

@@ -1,0 +1,128 @@
+<?php
+$nombreCompleto = $this->escapeHtml($trabajador->nombre).' '.$this->escapeHtml($trabajador->apellidos);
+$profesion = $this->escapeHtml($tipo);
+$this->title = $nombreCompleto;
+$this->headTitle($this->title);
+?>
+<head>
+    <div class="page-header">
+      <div class="row">
+        <div class="span8">
+          <h1><?php echo $nombreCompleto ?><small> <?php echo $tipo ?></small></h1>
+        </div>
+        <div class="span4" style="margin-top:15px;">
+                <div class="pull-right">
+                    <div class="span1">
+                        <form action="<?php echo $this->url('trabajador',
+                                            array('action'=>'edit', 'dni' => $trabajador->dni));?>">
+                            <input class="btn" type="submit" value="Editar">
+                        </form>
+                    </div>
+                    <div class="span1">
+                        <!--<a href="#myModal" role="button" style="margin-top:30px" class="delete-confirm btn btn-danger" data-toggle="modal">Eliminar</a>-->
+                        <form action="<?php echo $this->url('trabajador',
+                                    array('action'=>'delete', 'dni' => $trabajador->dni));?>">
+                            <input class="btn btn-danger" type="submit" value="Eliminar">
+                        </form>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+</head>
+
+<body>
+  <div class="container">
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#tab1" data-toggle="tab">Datos personales</a></li>
+          <li><a href="#tab2" data-toggle="tab">Proyectos asociados</a></li>
+        </ul>
+
+      <div class="tab-content">
+          <div class="tab-pane active" id="tab1">
+              <h3>Datos generales</h3>
+              <div class="row">
+              <!-- imagen -->
+              <div class="span3">
+                <h3><small>FOTO</small></h3>
+                <img src="http://i.imgur.com/QUkK5uy.jpg" class="img-polaroid">
+              </div>
+              <!-- datos personales -->
+              <div class="span8">
+                <div class="row">
+                    <div class="span8">
+                        <div class="row">
+                            <div class="span4">
+                                <h3><small>NOMBRE </small><p><?php echo $nombreCompleto ?></p></h3>
+                            </div>
+                            <div class="span4">
+                                <h3><small>PROFESION</small><p><?php echo $tipo;?></p></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="span4">
+                                <h3><small>DNI </small><p><?php echo $trabajador->dni ?></p></h3>
+                            </div>
+                            <div class="span4">
+                                <h3><small>FECHA DE NACIMIENTO</small><p><?php echo $trabajador->fechaNacimiento;?></p></h3>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="span9">
+                        <div class="row">
+                            <div class="span4">
+                                <h3><small>TELEFONO</small><p><?php echo $trabajador->telefono;?></p></h3>
+                            </div>
+                            <div class="span4">
+                                <h3><small>CORREO</small><p><?php echo $trabajador->correo;?></p></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+           </div>
+          </div>
+
+          <div class="tab-pane" id="tab2">
+                <h3> Proyectos relacionados con 
+                    <?php echo $trabajador->nombre ?> <small>(<?php echo count($proyectos)?> proyectos)</small></h3>
+                <!--tabla-->
+                <?php if (count($proyectos) > 0) {
+                  echo '
+                  <table class="table">
+                  <tr>
+                      <th>Nombre</th>
+                      <th>Descripcion</th>
+                      <th>Estado</th>
+                  </tr>';
+                  foreach ($proyectos as $proyecto) : ?>
+                  <tr>
+                      <td><a href="<?php echo $this->url('proyecto',
+                                        array('action'  =>'detalle',
+                                                'id'   => $proyecto->id,
+                                        ));?>">
+                        <?php echo $this->escapeHtml($proyecto->nombre);?>
+                      </a></td>
+                      
+                      <td><?php if (strlen($this->escapeHtml($proyecto->descripcion))>40) 
+                                  echo substr($this->escapeHtml($proyecto->descripcion), 0, 40).'...'; 
+                                else echo $this->escapeHtml($proyecto->descripcion);?>
+                      </td>
+                      <td><?php echo ($this->escapeHtml($proyecto->estado) == 1) ? 'Abierto' : 'Terminado';?></td>
+                  </tr>
+                  <?php endforeach;
+                } else echo 'Sin proyectos asignados';?>
+                </table> 
+                <div class="alert alert-info" style="margin-top:50px;">
+                  <h4>Sección inacabada</h4>
+                  Todavía no está implementada la opción de editar la tabla de proyectos asociados a un trabajador. La lista de proyetos asociados se carga diréctamente desde el script sql, por lo que los nuevos trabajadores no tendrán proyectos asociados.
+
+                  Lamento las molestias.
+                </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</body>
