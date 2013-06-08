@@ -6,5 +6,11 @@ nbproject
 .idea
 .project
 .settings
-composer.lock
+composer.*
 vendor/bin
+INSTALL.txt
+LICENSE.txt
+README.txt
+demos/
+extras/documentation
+
