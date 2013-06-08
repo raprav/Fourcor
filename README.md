@@ -17,7 +17,8 @@ Base de datos
 -------------
 
 MySQL. Se incluye el script de creación de tablas y rellenado de las mismas en /sql/fourcor.sql.
-**Importante** para ejecutar en entorno local, modificar los parámetros *mysql:dbname* y *host* en el archivo **config/autoload/global.php** y los parámetros, y a su vez añadir los parámetros *username* y *password*.
+
+**Importante** para ejecutar en entorno local, modificar los parámetros *mysql:dbname* y *host* en el archivo **config/autoload/global.php** y a su vez modificar los parámetros *username* y *password* en el archivo **config/autoload/local.php**.
 
 Back-end
 --------
