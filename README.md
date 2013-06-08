@@ -7,11 +7,11 @@ Ingeniería del software
 -----------------------
 
 En /ingenieria se adjunta
--ER.png como modelo E-R de la base de datos.
--Proyecto en Visual Paradigm con el modelado UML
--*DCL-BD.png* como diagrama de clases UML para la base de datos.
--*DCL-GUI/BSS* como diagramde clases UML para la parte de negocio e interfaz de usuario.
--*DCL-BD+GUI/BSS* diagrama conjunto con ambas partes.
+*ER.png como modelo E-R de la base de datos.
+*Proyecto en Visual Paradigm con el modelado UML
+*DCL-BD.png como diagrama de clases UML para la base de datos.
+*DCL-GUI/BSS como diagramde clases UML para la parte de negocio e interfaz de usuario.
+*DCL-BD+GUI/BSS diagrama conjunto con ambas partes.
 
 Base de datos
 -------------
