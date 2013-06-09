@@ -3,9 +3,6 @@ Fourcor
 
 Gestión de proyectos de edificación.
 
-1. Recuerda hacer **php composer.phar install** para instalar los modulos externos despues de clonar este repositorio!!
-l lol
-
 #### Instalacion
 1. Clonar este repositorio en la carpeta donde quieras tenerlo.
 2. Crear una nueva base de datos llamada **fourcor** y cargar el script de /sql/fourcor.sql
