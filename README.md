@@ -2,6 +2,7 @@ Fourcor
 =======
 
 Gestión de proyectos de edificación.
+Recuerda hacer **php composer.phar install** para instalar los modulos externos despues de clonar este repositorio!!
 
 Ingeniería del software
 -----------------------
