@@ -2,7 +2,15 @@ Fourcor
 =======
 
 Gestión de proyectos de edificación.
-Recuerda hacer **php composer.phar install** para instalar los modulos externos despues de clonar este repositorio!!
+
+1. Recuerda hacer **php composer.phar install** para instalar los modulos externos despues de clonar este repositorio!!
+l lol
+
+#### Instalacion
+1. Clonar este repositorio en la carpeta donde quieras tenerlo.
+2. Crear una nueva base de datos llamada **fourcor** y cargar el script de /sql/fourcor.sql
+3. Configurar los parámetros de acceso a la base de datos en **/config/autoload/global.php** y **/config/autoload/local.php**
+4. Descargar o actualizar los módulos necesarios mediante Composer, ejecutando **php composer.phar install**
 
 Ingeniería del software
 -----------------------
@@ -19,7 +27,7 @@ Base de datos
 
 MySQL. Se incluye el script de creación de tablas y rellenado de las mismas en /sql/fourcor.sql.
 
-**Importante** para ejecutar en entorno local, modificar los parámetros *mysql:dbname* y *host* en el archivo **config/autoload/global.php** y a su vez modificar los parámetros *username* y *password* en el archivo **config/autoload/local.php**.
+**Importante** para ejecutar en entorno local, modificar los parámetros *mysql:dbname* y *host* en el archivo **/config/autoload/global.php** y a su vez modificar los parámetros *username* y *password* en el archivo **/config/autoload/local.php**.
 
 Back-end
 --------
