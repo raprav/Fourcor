@@ -18,19 +18,16 @@ class ProyectoTable
 
     public function fetchAll($paginated=false)
     {
-        if($paginated) {
-            // create a new Select object for the table proyecto
+        if($paginated) 
+        {
             $select = new Select('proyecto');
-            // create a new result set based on the Proyecto entity
+
             $resultSetPrototype = new ResultSet();
             $resultSetPrototype->setArrayObjectPrototype(new Proyecto());
-            // create a new pagination adapter object
+
             $paginatorAdapter = new DbSelect(
-                // our configured select object
                 $select,
-                // the adapter to run it against
                 $this->tableGateway->getAdapter(),
-                // the result set to hydrate
                 $resultSetPrototype
             );
             $paginator = new Paginator($paginatorAdapter);

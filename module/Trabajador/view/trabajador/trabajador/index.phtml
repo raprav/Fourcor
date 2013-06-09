@@ -12,8 +12,6 @@ $this->headTitle($title);
 <?php 
     $i = 0;
     foreach ($tipos as $tipo) :
-        //echo $i;
-        //echo $this->escapeHtml($tipo->nombre);
         $array[$i] = $this->escapeHtml($tipo->nombre);
         $i = $i+1;
     endforeach;    
@@ -64,26 +62,4 @@ $this->headTitle($title);
         )
     );
 ?>
-
-
-
-<!--<?php 
-    $i = 0;
-    foreach ($tipos as $tipo) :
-        echo $i;
-        //echo $this->escapeHtml($tipo->nombre);
-        $array[$i] = $this->escapeHtml($tipo->nombre);
-        $i = $i+1;
-        echo $this->escapeHtml($tipo->id);
-    endforeach;    
-    
-
-?>
-
-<?php 
-    for ($i = 0; $i < count($array); $i++) {
-        echo $array[$i];
-
-    }
-;?>-->
 

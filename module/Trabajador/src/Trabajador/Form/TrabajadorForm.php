@@ -7,7 +7,6 @@ class TrabajadorForm extends Form
 {
     public function __construct($name = null)
     {
-        // we want to ignore the name passed
         parent::__construct('trabajador');
         
         $this->setAttribute('method', 'post');

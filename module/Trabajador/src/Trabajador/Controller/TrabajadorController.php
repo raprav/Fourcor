@@ -16,16 +16,8 @@ class TrabajadorController extends AbstractActionController
 
     public function indexAction()
     {
-        /*return new ViewModel(array(
-            'trabajadores'  => $this->getTrabajadorTable()->fetchAll(),
-            'tipos'         => $this->getTipoTable()->fetchAll(),
-        ));*/
-
-        // grab the paginator from the TrabajadorTable
         $paginator = $this->getTrabajadorTable()->fetchAll(true);
-        // set the current page to what has been passed in query string, or to 1 if none set
         $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-        // set the number of items per page to 10
         $paginator->setItemCountPerPage(10);
 
         return new ViewModel(array(
@@ -49,7 +41,6 @@ class TrabajadorController extends AbstractActionController
                 $trabajador->exchangeArray($form->getData());
                 $this->getTrabajadorTable()->saveNewTrabajador($trabajador);
 
-                // Redirect to list of trabajadors
                 return $this->redirect()->toRoute('trabajador');
             }
         }
@@ -65,8 +56,6 @@ class TrabajadorController extends AbstractActionController
             ));
         }
 
-        // Get the Trabajador with the specified dni.  An exception is thrown
-        // if it cannot be found, in which case go to the index page.
         try {
             $trabajador = $this->getTrabajadorTable()->getTrabajador($dni);
         }
@@ -88,7 +77,6 @@ class TrabajadorController extends AbstractActionController
             if ($form->isValid()) {
                 $this->getTrabajadorTable()->saveTrabajador($form->getData());
 
-                // Redirect to list of trabajadors
                 return $this->redirect()->toRoute('trabajador');
             }
         }
@@ -115,7 +103,6 @@ class TrabajadorController extends AbstractActionController
                 $this->getTrabajadorTable()->deleteTrabajador($dni);
             }
 
-            // Redirect to list of trabajadors
             return $this->redirect()->toRoute('trabajador');
         }
 
@@ -137,7 +124,6 @@ class TrabajadorController extends AbstractActionController
             'trabajador'    => $this->getTrabajadorTable()->getTrabajador($this->params()->fromRoute('dni', 0)),
             'tipo'          => $array[$this->getTrabajadorTable()->getTrabajador($this->params()->fromRoute('dni', 0))->tipo],
             'proyectos'     => $this->getProyectoTable()->getProyectoDe($this->params()->fromRoute('dni', 0)),
-            //'proyectos'     => $this->getProyectoTable()->fetchAll(),
         ));
     }
 
